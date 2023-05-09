@@ -92,7 +92,6 @@ which the first member of each array record there are the id and the other are d
 }
 ```
 
-
 ### Adding Layers
 
 Fourthly, layers can be defined and this definition must be attached to related sources which were fetched before.
