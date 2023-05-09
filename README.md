@@ -59,12 +59,15 @@ to use as source-data for a map, and as a result is shown as a features on the m
 ### Map Plugins
 
 To illustration the text in the map for rtl languages, it is essential to set rtl plugin,after that the text in the map
-in correct order will be presented.
+in correct order will be presented.There is a function as a callback which notifies when the plugin is fully loaded.
+
 ```javascript
 mapboxgl.setRTLTextPlugin(
   "https://cdn.parsimap.ir/third-party/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-  null
+  () => {
+  }
 );
+
 ```
 
 ### Map Creation
