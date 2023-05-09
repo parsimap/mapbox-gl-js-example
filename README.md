@@ -56,6 +56,17 @@ to use as source-data for a map, and as a result is shown as a features on the m
 (() => main())();
 ```
 
+### Map Plugins
+
+To illustration the text in the map for rtl languages, it is essential to set rtl plugin,after that the text in the map
+in correct order will be presented.
+```javascript
+mapboxgl.setRTLTextPlugin(
+  "https://cdn.parsimap.ir/third-party/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
+  null
+);
+```
+
 ### Map Creation
 
 Firstly, the map should be created from mapboxgl which is available globally after including the related script; here
@@ -63,7 +74,7 @@ the script is used from parsimap cdn.To properly show the map; there is a need f
 the [following link](https://account.parsimap.ir/token-registration) could help you reach a Parsiamp company.
 
 ```javascript
- const map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
   container: "map",
   style:
     "https://api.parsimap.ir/styles/parsimap-streets-v11?key={PMI_TOKEN}",
