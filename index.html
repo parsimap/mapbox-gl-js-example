@@ -61,11 +61,12 @@
       async function main() {
         /**
          * To illustration the text in the map for rtl languages, it is essential to set rtl plugin,
-         * after that the text in the map in correct order will be presented.
+         * after that the text in the map in correct order will be presented.There is a function as a callback
+         * which notifies when the plugin is fully loaded.
          */
         mapboxgl.setRTLTextPlugin(
           "https://cdn.parsimap.ir/third-party/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-          null
+          () => {}
         );
 
         /**

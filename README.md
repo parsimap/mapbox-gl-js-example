@@ -7,7 +7,6 @@ This project is an example for implement a map in the JavaScript language withou
 The style and script of the `mapbox-gl-js` is added inside `header` tag of the html page.
 
 ```html
-
 <script src="https://cdn.parsimap.ir/third-party/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
 <link
   href="https://cdn.parsimap.ir/third-party/mapbox-gl-js/v1.13.0/mapbox-gl.css"
@@ -27,7 +26,7 @@ A dictionary to better access to source ids.
 const SOURCES = {
   region6_area: "region6_area",
   region6_important_streets: "region6_important_streets",
-  region6_restaurant_points: "region6_restaurant_points"
+  region6_restaurant_points: "region6_restaurant_points",
 };
 ```
 
@@ -59,12 +58,22 @@ to use as source-data for a map, and as a result is shown as a features on the m
 ### Map Plugins
 
 To illustration the text in the map for rtl languages, it is essential to set rtl plugin,after that the text in the map
-in correct order will be presented.
+in correct order will be presented.There is a function as a callback which notifies when the plugin is fully loaded.
+
 ```javascript
 mapboxgl.setRTLTextPlugin(
   "https://cdn.parsimap.ir/third-party/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-  null
+  () => {}
 );
+```
+
+### Fetch data
+
+All featureCollection files are fetched and ready to use as source
+data for a map, and as a result is shown as a features on the map.
+
+```javascript
+const sourceArrayList = await runSourceQueries();
 ```
 
 ### Map Creation
@@ -76,10 +85,9 @@ the [following link](https://account.parsimap.ir/token-registration) could help 
 ```javascript
 const map = new mapboxgl.Map({
   container: "map",
-  style:
-    "https://api.parsimap.ir/styles/parsimap-streets-v11?key={PMI_TOKEN}",
+  style: "https://api.parsimap.ir/styles/parsimap-streets-v11?key={PMI_TOKEN}",
   center: [51.4, 35.7],
-  zoom: 8
+  zoom: 8,
 });
 ```
 
@@ -88,8 +96,7 @@ const map = new mapboxgl.Map({
 Secondly, The `style.load` event of the map is used when there isa need to add following sources or layers.
 
 ```javascript
-map.on("style.load", () => {
-});
+map.on("style.load", () => {});
 ```
 
 ### Adding Sources
@@ -98,7 +105,7 @@ Thirdly, All sources were fetched is ready to use as a source.This data is an ar
 which the first member of each array record there are the id and the other are data.
 
 ```javascript
- for (const [id, data] of sourceArrayList) {
+for (const [id, data] of sourceArrayList) {
   map.addSource(id, { type: "geojson", data });
 }
 ```
@@ -112,10 +119,64 @@ Fourthly, layers can be defined and this definition must be attached to related 
 This layer is used to demonstrate an area which is related to a district of Tehran city.
 The area is shown as a polygon and filled with color.
 
+```javascript
+map.addLayer({
+  id: "area",
+  type: "fill",
+  source: SOURCES.region6_area,
+  paint: {
+    "fill-opacity": 0.5,
+    "fill-color": "#00b3be",
+  },
+});
+```
+
+#### Area Outline Layer
+
+This layer belonged to area layer
+which is used the same source and just illustration a border outside of area
+to specify the area with outside of area to be seen better.
+
+```javascript
+map.addLayer({
+  id: "area-outline",
+  type: "line",
+  source: SOURCES.region6_area,
+  paint: {
+    "line-width": 2,
+    "line-color": "#00919a",
+  },
+});
+```
+
 #### Street Layer
 
 This layer is illustrated the stroke on the map for three well-known roads of the city.
 
+```javascript
+map.addLayer({
+  id: "street",
+  type: "line",
+  source: SOURCES.region6_important_streets,
+  paint: {
+    "line-width": 4,
+    "line-color": "#3e570a",
+  },
+});
+```
+
 #### Restaurant Layer
 
 This layer is a circle layer that is displayed in each restaurant place as a circle on the map.
+
+```typescript
+map.addLayer({
+  id: "restaurant",
+  type: "circle",
+  source: SOURCES.region6_restaurant_points,
+  paint: {
+    "circle-opacity": 0.5,
+    "circle-color": "#ff1515",
+  },
+});
+```
