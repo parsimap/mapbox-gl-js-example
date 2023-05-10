@@ -124,20 +124,27 @@
             type: "fill",
             source: SOURCES.region6_area,
             paint: {
-              "fill-opacity": 0.5,
-              "fill-color": "#00b3be",
-            },
+              "fill-opacity": 0.25,
+              "fill-color": "#014a4f"
+            }
           });
 
+          /**
+           * Area Outline Layer
+           * This layer is belonged to area layer
+           * which is used the same source and just illustration a border outside of area
+           * to specify the area with outside of area to be seen better.
+           */
           map.addLayer({
-            id: "area-",
+            id: "area-outline",
             type: "line",
             source: SOURCES.region6_area,
             paint: {
               "line-width": 2,
-              "line-color": "#00919a",
-            },
+              "line-color": "#003134"
+            }
           });
+
 
           /**
            * Street Layer
