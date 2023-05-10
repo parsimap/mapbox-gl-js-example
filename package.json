@@ -1,0 +1,12 @@
+{
+  "name": "mapbox-gl-js-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/parsimap/mapbox-gl-js-example.git",
+  "author": "Muhamad Zolfaghari <muhamad.zolfaghari@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "@types/mapbox-gl": "^2.7.11"
+  }
+}
